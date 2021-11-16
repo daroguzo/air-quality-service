@@ -53,7 +53,7 @@ public class SeoulAirQualityApiDto {
         @JsonProperty("MSRRGN_NM")
         private String site;
         @JsonProperty("MSRSTE_NM")
-        private String areaIndex;
+        private String area;
         @JsonProperty("MSRDT")
         private String measurementTime;
         @JsonProperty("IDEX_NM")
