@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "api.busan.base-url",
-      "type": "java.lang.String"
-    }
-  ]
-}
