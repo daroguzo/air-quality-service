@@ -9,7 +9,7 @@ import lombok.Setter;
 @Data
 @Builder
 public class AirQualityDto {
-    Borough[] elements;
+    Gu[] elements;
     String sido;
     float averagePm10;
     AirQualityGrade averagePm10Grade;
@@ -18,7 +18,7 @@ public class AirQualityDto {
     @Getter
     @Setter
     @Builder
-    public static class Borough {
+    public static class Gu {
         String name;
 
         int pm25;

@@ -22,12 +22,12 @@ public class SeoulService {
     public AirQualityDto seoulMapper() {
 
         SeoulAirQualityApiDto.GetAirQualityResponse airQuality = seoulAirQualityApiCaller.getAirQuality();
-        List<AirQualityDto.Borough> boroughList = new ArrayList<>();
-        AirQualityDto.Borough[] boroughs;
+        List<AirQualityDto.Gu> guList = new ArrayList<>();
+        AirQualityDto.Gu[] gu;
         float sum = 0;
 
         for (SeoulAirQualityApiDto.Item item : airQuality.getResult().getItems()) {
-            AirQualityDto.Borough borough = AirQualityDto.Borough.builder()
+            AirQualityDto.Gu borough = AirQualityDto.Gu.builder()
                     .name(item.getArea())
                     .pm25(item.getPm25())
                     .gradePm25(getPm25Grade(item.getPm25()))
@@ -43,21 +43,21 @@ public class SeoulService {
                     .gradeSo2(getSo2Grade(item.getSo2()))
                     .build();
 
-            boroughList.add(borough);
+            guList.add(borough);
             sum += item.getPm10();
         }
 
-        boroughs = new AirQualityDto.Borough[boroughList.size()];
-        for (int i = 0; i < boroughList.size(); i++) {
-            boroughs[i] = boroughList.get(i);
+        gu = new AirQualityDto.Gu[guList.size()];
+        for (int i = 0; i < guList.size(); i++) {
+            gu[i] = guList.get(i);
         }
 
         return AirQualityDto.builder()
-                .elements(boroughs)
-                .sido("서울")
-                .averagePm10(sum / boroughs.length)
-                .averagePm10Grade(getPm10Grade((int)(sum / boroughs.length)))
-                .totalCount(boroughs.length)
+                .elements(gu)
+                .sido("서울시")
+                .averagePm10(sum / gu.length)
+                .averagePm10Grade(getPm10Grade((int)(sum / gu.length)))
+                .totalCount(gu.length)
                 .build();
     }
 }
