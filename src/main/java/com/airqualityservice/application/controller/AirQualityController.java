@@ -1,6 +1,6 @@
 package com.airqualityservice.application.controller;
 
-import com.airqualityservice.application.Sido;
+import com.airqualityservice.application.SidoType;
 import com.airqualityservice.application.service.AirQualityService;
 import com.airqualityservice.dto.AirQualityDto;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +14,8 @@ public class AirQualityController {
     private final AirQualityService seoulService;
 
     @GetMapping("/{sidoCode}")
-    public AirQualityDto getAirQuality(@PathVariable("sidoCode") Sido sidoCode,
+    public AirQualityDto getAirQuality(@PathVariable("sidoCode") SidoType sidoCode,
                                        @RequestParam(required = false) String gu) {
-        return seoulService.getAirQualityInfo(sidoCode, gu);
+        return seoulService.getAirQuality(sidoCode, gu);
     }
 }

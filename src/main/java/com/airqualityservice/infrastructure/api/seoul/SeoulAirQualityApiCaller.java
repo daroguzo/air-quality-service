@@ -1,5 +1,7 @@
 package com.airqualityservice.infrastructure.api.seoul;
 
+import com.airqualityservice.application.SidoType;
+import com.airqualityservice.application.service.Sido;
 import com.airqualityservice.dto.AirQualityDto;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +19,7 @@ import static com.airqualityservice.application.util.AirQualityGradeUtil.*;
 
 @Slf4j
 @Component
-public class SeoulAirQualityApiCaller {
+public class SeoulAirQualityApiCaller implements Sido {
 
     private final SeoulAirQualityApi seoulAirQualityApi;
 
@@ -33,7 +35,7 @@ public class SeoulAirQualityApiCaller {
         this.seoulAirQualityApi = retrofit.create(SeoulAirQualityApi.class);
     }
 
-    public AirQualityDto getAirQuality() {
+    public AirQualityDto getAirQualityDto() {
         try {
             var call = seoulAirQualityApi.getAirQuality();
             var response = call.execute().body();
@@ -55,6 +57,7 @@ public class SeoulAirQualityApiCaller {
             throw new RuntimeException("getAirQuality API error 발생! errorMessage=" + e.getMessage());
         }
     }
+
 
     private AirQualityDto convert(SeoulAirQualityApiDto.GetAirQualityResponse response) {
         List<AirQualityDto.Gu> guList = new ArrayList<>();

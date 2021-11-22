@@ -17,12 +17,12 @@ public class AirQualityDto {
         if (gu == null) {
             return this;
         }
-        var searchedGuInfo = searchGuAirQualityInfo(gu);
+        var searchedGuInfo = searchGuAirQuality(gu);
         guList = Collections.singletonList(searchedGuInfo);
         return this;
     }
 
-    private Gu searchGuAirQualityInfo(String gu) {
+    private Gu searchGuAirQuality(String gu) {
         return guList.stream()
                 .filter(guAirQualityInfo -> guAirQualityInfo.getName().equals(gu))
                 .findFirst()
