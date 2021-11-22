@@ -1,7 +1,7 @@
-package com.airqualityservice.controller;
+package com.airqualityservice.application.controller;
 
+import com.airqualityservice.application.service.SeoulService;
 import com.airqualityservice.dto.AirQualityDto;
-import com.airqualityservice.service.SeoulService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

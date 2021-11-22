@@ -1,5 +1,6 @@
 package com.airqualityservice.dto;
 
+import com.airqualityservice.application.AirQualityGrade;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -10,9 +11,8 @@ import lombok.Setter;
 public class AirQualityDto {
     Borough[] elements;
     String sido;
-    String gu;
     float averagePm10;
-    String averagePm10Grade;
+    AirQualityGrade averagePm10Grade;
     int totalCount;
 
     @Getter
@@ -21,17 +21,17 @@ public class AirQualityDto {
     public static class Borough {
         String name;
 
-        float pm25;
-        String gradePm25;
-        float pm10;
-        String gradePm10;
+        int pm25;
+        AirQualityGrade gradePm25;
+        int pm10;
+        AirQualityGrade gradePm10;
         float o3;
-        String gradeO3;
+        AirQualityGrade gradeO3;
         float no2;
-        String gradeNo2;
+        AirQualityGrade gradeNo2;
         float co;
-        String gradeCo;
+        AirQualityGrade gradeCo;
         float so2;
-        String gradeSo2;
+        AirQualityGrade gradeSo2;
     }
 }

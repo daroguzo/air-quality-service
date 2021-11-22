@@ -63,9 +63,9 @@ public class SeoulAirQualityApiDto {
         @JsonProperty("ARPLT_MAIN")
         private String mainMaterial;
         @JsonProperty("PM10")
-        private Float pm10;
+        private Integer pm10;
         @JsonProperty("PM25")
-        private Float pm25;
+        private Integer pm25;
         @JsonProperty("O3")
         private Float o3;
         @JsonProperty("NO2")
