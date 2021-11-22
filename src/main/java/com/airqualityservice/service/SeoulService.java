@@ -55,9 +55,9 @@ public class SeoulService {
 
         return SeoulAirQualityDto.builder()
                 .elements(boroughs)
-                .region("서울")
-                .averageDust(sum / boroughs.length)
-                .averageGrade(pm10Grade(sum / boroughs.length))
+                .sido("서울")
+                .averagePm10(sum / boroughs.length)
+                .averagePm10Grade(pm10Grade(sum / boroughs.length))
                 .totalCount(boroughs.length)
                 .build();
     }

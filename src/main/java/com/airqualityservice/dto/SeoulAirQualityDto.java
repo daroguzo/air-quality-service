@@ -9,9 +9,10 @@ import lombok.Setter;
 @Builder
 public class SeoulAirQualityDto {
     Borough[] elements;
-    String region;
-    float averageDust;
-    String averageGrade;
+    String sido;
+    String gu;
+    float averagePm10;
+    String averagePm10Grade;
     int totalCount;
 
     @Getter
