@@ -1,7 +1,7 @@
 package com.airqualityservice.application.controller;
 
 import com.airqualityservice.application.Sido;
-import com.airqualityservice.application.service.SeoulService;
+import com.airqualityservice.application.service.AirQualityService;
 import com.airqualityservice.dto.AirQualityDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AirQualityController {
 
-    private final SeoulService seoulService;
+    private final AirQualityService seoulService;
 
-    @GetMapping("/{sidoCode}}")
+    @GetMapping("/{sidoCode}")
     public AirQualityDto getAirQuality(@PathVariable("sidoCode") Sido sidoCode,
                                        @RequestParam(required = false) String gu) {
         return seoulService.getAirQualityInfo(sidoCode, gu);
