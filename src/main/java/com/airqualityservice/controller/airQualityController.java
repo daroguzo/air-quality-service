@@ -1,6 +1,6 @@
 package com.airqualityservice.controller;
 
-import com.airqualityservice.dto.SeoulAirQualityDto;
+import com.airqualityservice.dto.AirQualityDto;
 import com.airqualityservice.service.SeoulService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class airQualityController {
     private final SeoulService seoulService;
 
     @GetMapping("/seoul")
-    public SeoulAirQualityDto seoul() {
+    public AirQualityDto seoul() {
         return seoulService.seoulMapper();
     }
 }

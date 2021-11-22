@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Data
 @Builder
-public class SeoulAirQualityDto {
+public class AirQualityDto {
     Borough[] elements;
     String sido;
     String gu;

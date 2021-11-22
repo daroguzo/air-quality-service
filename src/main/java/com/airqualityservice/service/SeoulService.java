@@ -1,8 +1,8 @@
 package com.airqualityservice.service;
 
-import com.airqualityservice.dto.SeoulAirQualityDto;
-import com.airqualityservice.seoul.SeoulAirQualityApiCaller;
-import com.airqualityservice.seoul.SeoulAirQualityApiDto;
+import com.airqualityservice.dto.AirQualityDto;
+import com.airqualityservice.infrastructure.api.seoul.SeoulAirQualityApiCaller;
+import com.airqualityservice.infrastructure.api.seoul.SeoulAirQualityApiDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +20,15 @@ public class SeoulService {
 
     private final SeoulAirQualityApiCaller seoulAirQualityApiCaller;
 
-    public SeoulAirQualityDto seoulMapper() {
+    public AirQualityDto seoulMapper() {
 
         SeoulAirQualityApiDto.GetAirQualityResponse airQuality = seoulAirQualityApiCaller.getAirQuality();
-        List<SeoulAirQualityDto.Borough> boroughList = new ArrayList<>();
-        SeoulAirQualityDto.Borough[] boroughs;
+        List<AirQualityDto.Borough> boroughList = new ArrayList<>();
+        AirQualityDto.Borough[] boroughs;
         float sum = 0;
 
         for (SeoulAirQualityApiDto.Item item : airQuality.getResult().getItems()) {
-            SeoulAirQualityDto.Borough borough = SeoulAirQualityDto.Borough.builder()
+            AirQualityDto.Borough borough = AirQualityDto.Borough.builder()
                     .name(item.getArea())
                     .pm25(item.getPm25())
                     .gradePm25(pm25Grade(item.getPm25()))
@@ -48,12 +48,12 @@ public class SeoulService {
             sum += item.getPm10();
         }
 
-        boroughs = new SeoulAirQualityDto.Borough[boroughList.size()];
+        boroughs = new AirQualityDto.Borough[boroughList.size()];
         for (int i = 0; i < boroughList.size(); i++) {
             boroughs[i] = boroughList.get(i);
         }
 
-        return SeoulAirQualityDto.builder()
+        return AirQualityDto.builder()
                 .elements(boroughs)
                 .sido("서울")
                 .averagePm10(sum / boroughs.length)

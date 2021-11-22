@@ -1,4 +1,4 @@
-package com.airqualityservice.busan;
+package com.airqualityservice.infrastructure.api.seoul;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,10 +12,10 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-public class BusanAirQualityApiCaller {
-    private final BusanAirQualityApi busanAirQualityApi;
+public class SeoulAirQualityApiCaller {
+    private final SeoulAirQualityApi seoulAirQualityApi;
 
-    public BusanAirQualityApiCaller(@Value("${api.busan.base-url}") String baseUrl) {
+    public SeoulAirQualityApiCaller(@Value("${api.seoul.base-url}") String baseUrl) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -24,13 +24,14 @@ public class BusanAirQualityApiCaller {
                 .addConverterFactory(JacksonConverterFactory.create(objectMapper))
                 .build();
 
-        this.busanAirQualityApi = retrofit.create(BusanAirQualityApi.class);
+        this.seoulAirQualityApi = retrofit.create(SeoulAirQualityApi.class);
     }
 
-    public BusanAirQualityApiDto.GetAirQualityResponse getAirQuality() {
+    public SeoulAirQualityApiDto.GetAirQualityResponse getAirQuality() {
         try {
-            var call = busanAirQualityApi.getAirQuality();
+            var call = seoulAirQualityApi.getAirQuality();
             var response = call.execute().body();
+            System.out.println(response.getResult().toString());
 
             if (response == null || response.getResult() == null) {
                 throw new RuntimeException("getAirQuality 응답값이 존재하지 않습니다.");

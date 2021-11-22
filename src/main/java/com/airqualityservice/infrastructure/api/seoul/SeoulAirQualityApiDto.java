@@ -1,4 +1,4 @@
-package com.airqualityservice.seoul;
+package com.airqualityservice.infrastructure.api.seoul;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
