@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/v1/api/air_quality", produces = "application/json;charset=utf-8")
 @RequiredArgsConstructor
-public class airQualityController {
+public class AirQualityController {
 
     private final SeoulService seoulService;
 
