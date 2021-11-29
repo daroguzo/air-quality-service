@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/v1/api/air_quality", produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/v1/api/air-quality", produces = "application/json;charset=utf-8")
 @RequiredArgsConstructor
 public class AirQualityController {
 
