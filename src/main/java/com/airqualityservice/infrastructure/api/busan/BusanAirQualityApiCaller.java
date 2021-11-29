@@ -1,7 +1,6 @@
 package com.airqualityservice.infrastructure.api.busan;
 
-import com.airqualityservice.application.SidoType;
-import com.airqualityservice.application.service.Sido;
+import com.airqualityservice.application.service.KoreaAirQualityService;
 import com.airqualityservice.dto.AirQualityDto;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +18,7 @@ import static com.airqualityservice.application.util.AirQualityGradeUtil.*;
 
 @Slf4j
 @Component
-public class BusanAirQualityApiCaller implements Sido {
+public class BusanAirQualityApiCaller implements KoreaAirQualityService {
     private final BusanAirQualityApi busanAirQualityApi;
 
     public BusanAirQualityApiCaller(@Value("${api.busan.base-url}") String baseUrl) {
@@ -34,7 +33,7 @@ public class BusanAirQualityApiCaller implements Sido {
         this.busanAirQualityApi = retrofit.create(BusanAirQualityApi.class);
     }
 
-    public AirQualityDto getAirQualityDto() {
+    public AirQualityDto getAirQualityInfo() {
         try {
             var call = busanAirQualityApi.getAirQuality();
             var response = call.execute().body();

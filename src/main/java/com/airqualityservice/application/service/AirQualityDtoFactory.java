@@ -19,10 +19,10 @@ public class AirQualityDtoFactory {
 
           switch (sidoType) {
                case seoul:
-                    airQualityDto =  seoulAirQualityApiCaller.getAirQualityDto();
+                    airQualityDto =  seoulAirQualityApiCaller.getAirQualityInfo();
                     break;
                case busan:
-                    airQualityDto = busanAirQualityApiCaller.getAirQualityDto();
+                    airQualityDto = busanAirQualityApiCaller.getAirQualityInfo();
                     break;
                default:
                     throw new IllegalArgumentException("지원하지 않는 도시입니다.");
