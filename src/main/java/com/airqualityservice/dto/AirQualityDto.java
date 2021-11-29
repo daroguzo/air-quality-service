@@ -2,14 +2,12 @@ package com.airqualityservice.dto;
 
 import com.airqualityservice.application.AirQualityGrade;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Collections;
 import java.util.List;
 
-@Data
+@Getter
 @Builder
 public class AirQualityDto {
 
@@ -36,7 +34,6 @@ public class AirQualityDto {
     int totalCount;
 
     @Getter
-    @Setter
     @Builder
     public static class Gu {
         String name;
