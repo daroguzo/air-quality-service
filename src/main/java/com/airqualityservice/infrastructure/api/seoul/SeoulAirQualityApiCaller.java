@@ -1,5 +1,6 @@
 package com.airqualityservice.infrastructure.api.seoul;
 
+import com.airqualityservice.application.SidoType;
 import com.airqualityservice.application.service.KoreaAirQualityService;
 import com.airqualityservice.dto.AirQualityDto;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -34,6 +35,11 @@ public class SeoulAirQualityApiCaller implements KoreaAirQualityService {
         this.seoulAirQualityApi = retrofit.create(SeoulAirQualityApi.class);
     }
 
+    @Override
+    public SidoType getSidoType() {
+        return SidoType.seoul;
+    }
+
     public AirQualityDto getAirQualityInfo() {
         try {
             var call = seoulAirQualityApi.getAirQuality();
@@ -59,11 +65,11 @@ public class SeoulAirQualityApiCaller implements KoreaAirQualityService {
 
 
     private AirQualityDto convert(SeoulAirQualityApiDto.GetAirQualityResponse response) {
-        List<AirQualityDto.Gu> guList = new ArrayList<>();
+        List<AirQualityDto.GuAirQualityInfo> guAirQualityInfoList = new ArrayList<>();
         float sum = 0;
 
         for (SeoulAirQualityApiDto.Item item : response.getResult().getItems()) {
-            AirQualityDto.Gu gu = AirQualityDto.Gu.builder()
+            AirQualityDto.GuAirQualityInfo guAirQualityInfo = AirQualityDto.GuAirQualityInfo.builder()
                     .name(item.getArea())
                     .pm25(item.getPm25())
                     .gradePm25(getPm25Grade(item.getPm25()))
@@ -79,16 +85,16 @@ public class SeoulAirQualityApiCaller implements KoreaAirQualityService {
                     .gradeSo2(getSo2Grade(item.getSo2()))
                     .build();
 
-            guList.add(gu);
+            guAirQualityInfoList.add(guAirQualityInfo);
             sum += item.getPm10();
         }
 
         return AirQualityDto.builder()
-                .guList(guList)
+                .guList(guAirQualityInfoList)
                 .sido("서울시")
-                .averagePm10(sum / guList.size())
-                .averagePm10Grade(getPm10Grade((int)(sum / guList.size())))
-                .totalCount(guList.size())
+                .averagePm10(sum / guAirQualityInfoList.size())
+                .averagePm10Grade(getPm10Grade((int)(sum / guAirQualityInfoList.size())))
+                .totalCount(guAirQualityInfoList.size())
                 .build();
     }
 }

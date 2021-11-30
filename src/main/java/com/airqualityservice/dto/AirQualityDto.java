@@ -16,18 +16,18 @@ public class AirQualityDto {
             return this;
         }
         var searchedGuInfo = searchGuAirQuality(gu);
-        guList = Collections.singletonList(searchedGuInfo);
+        this.guList = Collections.singletonList(searchedGuInfo);
         return this;
     }
 
-    private Gu searchGuAirQuality(String gu) {
+    private GuAirQualityInfo searchGuAirQuality(String gu) {
         return guList.stream()
                 .filter(guAirQualityInfo -> guAirQualityInfo.getName().equals(gu))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(gu + "에 해당하는 자치구가 존재하지 않습니다."));
     }
 
-    List<Gu> guList;
+    List<GuAirQualityInfo> guList;
     String sido;
     float averagePm10;
     AirQualityGrade averagePm10Grade;
@@ -35,7 +35,7 @@ public class AirQualityDto {
 
     @Getter
     @Builder
-    public static class Gu {
+    public static class GuAirQualityInfo {
         String name;
 
         int pm25;

@@ -1,5 +1,6 @@
 package com.airqualityservice.infrastructure.api.busan;
 
+import com.airqualityservice.application.SidoType;
 import com.airqualityservice.application.service.KoreaAirQualityService;
 import com.airqualityservice.dto.AirQualityDto;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -33,6 +34,11 @@ public class BusanAirQualityApiCaller implements KoreaAirQualityService {
         this.busanAirQualityApi = retrofit.create(BusanAirQualityApi.class);
     }
 
+    @Override
+    public SidoType getSidoType() {
+        return SidoType.busan;
+    }
+
     public AirQualityDto getAirQualityInfo() {
         try {
             var call = busanAirQualityApi.getAirQuality();
@@ -56,7 +62,7 @@ public class BusanAirQualityApiCaller implements KoreaAirQualityService {
     }
 
     private AirQualityDto convert(BusanAirQualityApiDto.GetAirQualityResponse response) {
-        List<AirQualityDto.Gu> guList = new ArrayList<>();
+        List<AirQualityDto.GuAirQualityInfo> guAirQualityInfoList = new ArrayList<>();
         float sum = 0;
         int pm10ErrorCount = 0;
 
@@ -66,7 +72,7 @@ public class BusanAirQualityApiCaller implements KoreaAirQualityService {
              pm10ErrorCount++;
              item.setPm10("0");
             }
-            AirQualityDto.Gu gu = AirQualityDto.Gu.builder()
+            AirQualityDto.GuAirQualityInfo guAirQualityInfo = AirQualityDto.GuAirQualityInfo.builder()
                     .name(item.getSite())
                     .pm25(Integer.parseInt(item.getPm25()))
                     .gradePm25(getPm25Grade(Integer.parseInt(item.getPm25())))
@@ -82,16 +88,16 @@ public class BusanAirQualityApiCaller implements KoreaAirQualityService {
                     .gradeSo2(getSo2Grade(Float.parseFloat(item.getSo2())))
                     .build();
 
-            guList.add(gu);
+            guAirQualityInfoList.add(guAirQualityInfo);
             sum += Integer.parseInt(item.getPm10());
         }
 
         return AirQualityDto.builder()
-                .guList(guList)
+                .guList(guAirQualityInfoList)
                 .sido("부산시")
-                .averagePm10(sum / guList.size())
-                .averagePm10Grade(getPm10Grade((int)(sum / guList.size() - pm10ErrorCount)))
-                .totalCount(guList.size())
+                .averagePm10(sum / guAirQualityInfoList.size())
+                .averagePm10Grade(getPm10Grade((int)(sum / guAirQualityInfoList.size() - pm10ErrorCount)))
+                .totalCount(guAirQualityInfoList.size())
                 .build();
     }
 }

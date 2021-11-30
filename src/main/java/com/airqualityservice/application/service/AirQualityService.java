@@ -3,15 +3,25 @@ package com.airqualityservice.application.service;
 import com.airqualityservice.application.SidoType;
 import com.airqualityservice.dto.AirQualityDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AirQualityService {
 
-    private final AirQualityDtoFactory airQualityServiceFactory;
+    private final KoreaAirQualityServiceFactory koreaAirQualityServiceFactory;
 
-    public AirQualityDto getAirQuality(SidoType sido, String gu) {
-        return airQualityServiceFactory.getAirQualityDto(sido, gu);
+    @Cacheable(value = "airQualityInfo", key = "#sidoType +'-'+ #gu + '-' + #dateHourString")
+    public AirQualityDto getAirQualityInfo(SidoType sidoType, String gu, String dateHourString) {
+        KoreaAirQualityService service = koreaAirQualityServiceFactory.getService(sidoType);
+
+        var airQualityInfo = service.getAirQualityInfo();
+        if (gu.equals("all") == false) {
+            return airQualityInfo.searchByGu(gu);
+        }
+        return airQualityInfo;
     }
+
+
 }
