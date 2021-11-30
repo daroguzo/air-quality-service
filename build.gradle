@@ -22,8 +22,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // spring cache
+    // cache
     implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
 
     //    retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
