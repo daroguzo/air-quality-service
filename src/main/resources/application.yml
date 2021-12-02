@@ -7,3 +7,8 @@ api:
     base-url: http://apis.data.go.kr/6260000/
   seoul:
     base-url: http://openAPI.seoul.go.kr:8088/
+
+spring:
+  cache:
+    jcache:
+      config: classpath:ehcahce.xml

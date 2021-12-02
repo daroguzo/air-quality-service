@@ -17,6 +17,7 @@ public class AirQualityController {
     @GetMapping("/{sidoCode}")
     public AirQualityDto getAirQuality(@PathVariable("sidoCode") SidoType sidoCode,
                                        @RequestParam(required = false, defaultValue = "all") String gu) {
+
         return airQualityService.getAirQualityInfo(sidoCode, gu, DateUtil.getDateHourString());
     }
 }
