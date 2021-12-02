@@ -5,6 +5,7 @@ import com.airqualityservice.dto.AirQualityDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,7 +24,8 @@ public class AirQualityService {
         return airQualityInfo;
     }
 
-
+    // 매 정각마다 모든 캐시 초기화
+    @Scheduled(cron = "0 0 0/1 * * *")
     @CacheEvict(value = "airQualityInfo", allEntries = true)
     public void updateAirQualityInfo() {
 
